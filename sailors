@@ -1,0 +1,99 @@
+
+**Create Table sailors **
+CREATE TABLE sailors (
+  sid INTEGER PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  rating INT NOT NULL,
+  age NUMBER(3,1)NOT NULL
+);
+ 
+**create a table**
+CREATE TABLE Boats 
+(
+  bid INT PRIMARY KEY'
+  bname  VARCHAR(100) NOT NULL,
+  colour VARCHAR(100)  NOT NULL
+);
+
+** Create Table Reserves**
+CREATE TABLE Reserves(
+  sid INT NOT NULL,
+  bid INT NOT NULL,
+  day INT NOT NULL
+);
+
+
+** insert some values **
+INSERT INTO sailors (sid, name, rating, age) VALUES ('22', 'Dustin', '7', '45.0');
+INSERT INTO sailors
+VALUES ('29', 'Brutus', '1', '33.0');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('31', 'Lubber', '8', '55.5');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('32', 'Andy', '8', '25.5');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('58', 'Rusty', '10', '35.0');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('64', 'Horiato', '7', '35.0');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('71', 'Zorba', '10', '16.0');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('74', 'Horiato', '9', '35.0');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('85', 'Art', '3', '25.5');
+INSERT INTO sailors (sid, name, rating, age)
+VALUES ('95', 'Bob', '3', '63.5');
+
+**insert some values**
+INSERT INTO Reserves (sid, bid, day)
+VALUES ('22', '101', '#10/10/98#');
+INSERT INTO  Reserves (sid, bid, day) 
+VALUES ('22', '102', '#10/10/98#');
+INSERT INTO Reserves (sid, bid, day)
+VALUES ('22', '103', '#10/8/98#');
+INSERT INTO Reserves (sid, bid, day)
+VALUES ('22', '104', '10/7/98');
+INSERT INTO  Reserves (sid, bid, day)
+VALUES ('31', '102', '#11/10/98#');
+INSERT INTO  Reserves(sid, bid, day)
+VALUES ('31', '103', '#11/6/98#');
+INSERT INTO  Reserves (sid, bid, day)
+VALUES ('31', '104', '#11/12/98#');
+INSERT INTO  Reserves (sid, bid, day)
+VALUES ('64', '101', '#9/5/98#');
+INSERT INTO  Reserves (sid, bid, day)
+VALUES ('64', '102', '#9/8/98#');
+INSERT INTO  Reserves (sid, bid, day)
+VALUES ('74', '103', '#9/8/98#');
+
+**insert some values**
+INSERT INTO Boats (bid, bname, colour)
+VALUES ('101', 'Interlack', 'Blue');
+INSERT INTO Boats (bid, bname, colour)
+VALUES ('102', 'Interlack', 'Red');
+INSERT INTO Boats (bid, bname, colour)
+VALUES ('103', 'Clipper', 'Green');
+INSERT INTO Boats (bid, bname, colour)
+VALUES ('104', 'Marine', 'Red');
+
+//PRACTICE QUESTIONS
+
+1)Sailors with Maximum Rating
+
+CODE:
+SELECT name 
+FROM sailors 
+WHERE rating = (SELECT MAX(rating) FROM sailors);
+
+O/P:
+NAME
+Rusty
+Zorba
+
+2)Boats Reserved by Sailors of a Certain Age
+
+CODE:
+
+
+
+
