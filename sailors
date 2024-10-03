@@ -45,26 +45,18 @@ INSERT INTO sailors (sid, name, rating, age)
 VALUES ('95', 'Bob', '3', '63.5');
 
 **insert some values**
-INSERT INTO Reserves (sid, bid, day)
-VALUES ('22', '101', '#10/10/98#');
-INSERT INTO  Reserves (sid, bid, day) 
-VALUES ('22', '102', '#10/10/98#');
-INSERT INTO Reserves (sid, bid, day)
-VALUES ('22', '103', '#10/8/98#');
-INSERT INTO Reserves (sid, bid, day)
-VALUES ('22', '104', '10/7/98');
-INSERT INTO  Reserves (sid, bid, day)
-VALUES ('31', '102', '#11/10/98#');
-INSERT INTO  Reserves(sid, bid, day)
-VALUES ('31', '103', '#11/6/98#');
-INSERT INTO  Reserves (sid, bid, day)
-VALUES ('31', '104', '#11/12/98#');
-INSERT INTO  Reserves (sid, bid, day)
-VALUES ('64', '101', '#9/5/98#');
-INSERT INTO  Reserves (sid, bid, day)
-VALUES ('64', '102', '#9/8/98#');
-INSERT INTO  Reserves (sid, bid, day)
-VALUES ('74', '103', '#9/8/98#');
+
+INSERT INTO reserves (sid, bid, day) VALUES (22, 101, TO_DATE('1998-10-10', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (22, 102, TO_DATE('1998-10-10', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (22, 103, TO_DATE('1998-10-08', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (22, 104, TO_DATE('1998-10-07', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (31, 102, TO_DATE('1998-11-10', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (31, 103, TO_DATE('1998-11-06', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (31, 104, TO_DATE('1998-11-12', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (64, 101, TO_DATE('1998-09-05', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (64, 102, TO_DATE('1998-09-08', 'YYYY-MM-DD'));
+INSERT INTO reserves (sid, bid, day) VALUES (74, 103, TO_DATE('1998-09-08', 'YYYY-MM-DD'));
+
 
 **insert some values**
 INSERT INTO Boats (bid, bname, colour)
@@ -93,7 +85,104 @@ Zorba
 2)Boats Reserved by Sailors of a Certain Age
 
 CODE:
+SELECT b.bname AS boat_name, s.name AS sailor_name
+FROM sailors s
+JOIN reserves r ON s.sid = r.sid
+JOIN boats b ON r.bid = b.bid
+WHERE s.age > 22;
 
+O/P:
+BOAT_NAME	SAILOR_NAME
+Interlack	Dustin
+Interlack	Dustin
+Clipper	Dustin
+Marine	Dustin
+Interlack	Lubber
+Clipper	Lubber
+Marine	Lubber
+Interlack	Horiato
+Interlack	Horiato
+Clipper	Horiato
+
+3)Find Sailors with a Specific Rating
+
+CODE:
+SELECT * FROM sailors WHERE rating > 5;
+
+O/P:
+SID	NAME	RATING	AGE
+22	Dustin	7	45
+31	Lubber	8	55.5
+32	Andy	8	25.5
+58	Rusty	10	35
+64	Horiato	7	35
+71	Zorba	10	16
+74	Horiato	9	35
+
+4)Write a query to count the number of sailors in each age group (e.g., group by age)
+
+CODE:
+SELECT age, COUNT(*) AS num_sailors
+FROM sailors
+GROUP BY age;
+
+O/P:
+AGE	NUM_SAILORS
+63.5	1
+45	1
+35	3
+33	1
+55.5	1
+25.5	2
+16	1
+
+5)Write a query to find the names of all sailors who have reserved any boat.
+
+CODE:
+SELECT DISTINCT s.name
+FROM sailors s
+JOIN reserves r ON s.sid = r.sid;
+
+O/P:
+NAME
+Lubber
+Dustin
+Horiato
+
+6)Write a query to find sailors who have not made any reservations.
+
+CODE:
+SELECT * FROM sailors
+WHERE sid NOT IN (SELECT DISTINCT sid FROM reserves);
+
+O/P:
+SID	NAME	RATING	AGE
+58	Rusty	10	35
+85	Art	3	25.5
+71	Zorba	10	16
+29	Brutus	1	33
+95	Bob	3	63.5
+32	Andy	8	25.5
+
+7)Write a query to calculate the average age of all sailors.
+
+CODE:
+SELECT AVG(age) AS average_age FROM sailors;
+
+O/P:
+AVERAGE_AGE
+36.9
+
+8)Write a query to find the sailor with the minimum age.
+
+CODE:
+
+
+SELECT * FROM sailors
+WHERE age = (SELECT MIN(age) FROM sailors);
+
+SID	NAME	RATING	AGE
+71	Zorba	10	16
 
 
 
